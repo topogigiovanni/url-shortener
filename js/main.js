@@ -52,7 +52,7 @@
 		var _each = function(action){
 			(data || []).forEach(action);
 		};
-		var save = function(){
+		var _save = function(){
 			storage.set(name, data);
 		};
 
@@ -70,14 +70,14 @@
 		self.add = function(url){
 			data = data || [];
 			data.push(url);
-			save();
+			_save();
 		};
 		self.update = function(el){
 			_each(function(e, i){
 				if(e.id === el.id)
 					e = el;
 			});
-			save();
+			_save();
 		};
 		self.remove = function(id){
 			var index;
@@ -89,7 +89,7 @@
 				data = data || [];
 				data.splice(index, 1);
 			}
-			save();
+			_save();
 		};
 		
 		_fetchData();
@@ -132,14 +132,13 @@
 	}
 
 	function Profile(){
-		// Apenas para teste, isso deve ser implementado direto
+		/* *** Apenas para teste, isso deve ser implementado *** */
 		var cachedUser = userRepository.findAll();
-		//console.log('cachedUser', cachedUser);
 		var isAuthenticated = cachedUser && cachedUser.length ? true : false;
 		this.isAuthenticated = isAuthenticated;
 		if(isAuthenticated)
 			cachedUser = cachedUser[0];
-		//
+		/* *** *** */
 		this.id = isAuthenticated ? cachedUser.id : null;
 		this.name = isAuthenticated ? cachedUser.name : null;
 	};
@@ -243,11 +242,11 @@
 					$resultBox.find('.copyurl').on('click', function(e){
 						e.preventDefault();
 						
-						var copyTextarea = $resultBox.find('input').first();
-						copyTextarea.select();
-						try {
+						try{
+							var copyTextarea = $resultBox.find('input').first();
+							copyTextarea.select();
 							var successful = document.execCommand('copy');
-						} catch (err) {
+						}catch(err){
 							window.prompt("Use os seguintes comandos para copiar: Ctrl+C, Enter", url.toString());
 							console.error('Não foi possível copiar o texto');
 						}
@@ -274,7 +273,7 @@
 				};
 				var appendAuthenticatedContent = function(){
 					var tpl = $('#authenticated-template').html();
-					tpl = tpl.replace('{{USER}}', profile.name);
+					tpl = helper.replaceAll(tpl, '{{USER}}', profile.name);
 					$scope.html(tpl);
 					bindScope();
 				};
