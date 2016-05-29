@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>URL Shortener</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- Posto no head devido as validações de roteamento que necessitam ser feitas antes do parseamento total do html -->
+        <script src="js/dom-helper.min.js"></script>
+        <script src="js/main.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <section class="wrapper">
+            <header id="header"></header>
+            <h1 id="logo">
+                URL <em>Shortener</em>
+            </h1>
+            <div id="app" >
+                <p>
+                    Encurte URLs de forma fácil
+                </p>
+                <form>
+                    <div class="input-group">
+                        <input required placeholder="Digite ou cole sua URL" type="url" name="url"/>
+                        <button class="btn success">Encurtar</button>
+                    </div>
+                </form>
+                <div class="hidden upload-result">
+                    <p>Pronto!! é só copiar e compartilhar.</p>
+                    <div class="input-group">
+                        <input  value="" />
+                        <button class="btn info copyurl">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="modal" class="hidden">
+            <div class="overlay"></div>
+            <div class="container">
+                <a href="javascript:void(0)" class="close">X</a>
+                <div class="content"></div>
+            </div>
+        </div>
+
+        <script id="authenticated-template" type="text/template">
+            <ul>
+                <li class="welcome-message">Olá, {{USER}}</li>
+                <li><a class="list-urls-action" href="javascript:void(0);">Minhas URLs</a></li>
+                <li><a class="logout-action" href="javascript:void(0);">Sair</a></li>
+            </ul>
+        </script>
+        <script id="not-authenticated-template" type="text/template">
+            <ul>
+                <li><a class="login-action" href="javascript:void(0);">Login</a></li>
+            </ul>
+        </script>
+        <script id="login-template" type="text/template">
+            <div class="login-box">
+                <p class="title">
+                    Login
+                    <small>Usuário: user | Senha: pass</small>
+                </p>
+                <form>
+                    <div class="input-wrapper">
+                        <label>Usuário</label>
+                        <input class="user" type="text" required />
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Senha</label>
+                        <input class="pass" type="password" required />
+                    </div>
+                    <br>
+                    <div class="input-wrapper text-center">
+                        <button class="btn success">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </script>
+        <script id="list-urls-template" type="text/template">
+            <div class="list-urls-box">
+                <p class="title">
+                    Gerenciar minhas URLs
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="35%">Encurtada</th>
+                            <th width="35%">Original</th>
+                            <th width="15%">Clicks</th>
+                            <th class="last" width="15%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{LIST}}
+                    </tbody>
+                </table>
+            </div>
+        </script>
+        <script id="url-item-template" type="text/template">
+            <tr id="{{ID}}">
+                <td>
+                    {{SHORT}}
+                </td>
+                <td>
+                    <a href="{{ORIGINAL}}" class="link" target="_blank">{{ORIGINAL}}
+                    </a>
+                </td>
+                <td class="text-center">
+                    {{CLICKS}}
+                </td>
+                <td class="last text-center">
+                    <a data-url-id="{{ID}}" href="javascript:void(0)" title="Remover" class="remove link">X</a>
+                </td>
+            </tr>
+        </script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+#app{
+	margin: 50px 150px;
+	border-radius: 8px;
+	border: 1px solid $border-color;
+	background: #fff;
+	text-align: center;
+	min-width: 300px;
+	position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+
+	p{
+		font-size: 14.5pt;
+	}
+
+	.input-group{
+		input{
+			width: 325px;
+			text-indent: 10px;
+		}
+	}
+
+	form{
+		margin-bottom: 35px;
+	}
+
+	.upload-result{
+		margin-bottom: 20px;
+	    padding-bottom: 20px;
+	    width: 80%;
+	    margin: 20px auto;
+	    border: thin solid #ccc;
+	    border-radius: 4px;
+	    background: #F5F2F2;
+
+	    p{
+	    	color: rgba(0, 0, 0, 0.57);
+	    }
+	}
+}
+
+@media (max-width: 700px){
+	#app{
+		margin: 50px 9px;
+
+		.input-group{
+			input{
+				width: 185px;
+			}
+		}
+
+	}
+}
