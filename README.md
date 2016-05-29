@@ -1,6 +1,6 @@
 # URL Shortener
 
-This project was created with no third party libs in client side.
+This project was created with no third party library in client side.
 
 ## Install dependencies
 
