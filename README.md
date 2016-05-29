@@ -1,6 +1,6 @@
 # URL Shortener
 
-_ Proof of Concept_
+*Proof of Concept*
 
 This project was created with no third party library in client side.
 
